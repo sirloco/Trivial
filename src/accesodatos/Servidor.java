@@ -16,22 +16,22 @@ public class Servidor {
 
         try {
 
-            //Puerto por el que se va a comunicar con el cliente
+            //Puerto por el que se va a comunicar con el jugador
             int PUERTO = 5000;
 
-            //Socket que va a recibir las peticiones del cliente
+            //Socket que va a recibir las respuestas del jugador
             ServerSocket skServer = new ServerSocket(PUERTO);
 
-            //Socket del cliente
-            Socket skCliente;
+            //Socket del jugador
+            Socket skJugador;
 
             while (true) {
 
-                //Se aceptan pecitiones de varios clientes
-                skCliente = skServer.accept();
+                //Se aceptan pecitiones de varios jugadores
+                skJugador = skServer.accept();
 
-                //Se crea un hilo nuevo por cada peticion
-                new Hilo(skCliente).start();
+                //Se crea un hilo nuevo por cada jugador
+                new Hilo(skJugador).start();
             }
 
         } catch (IOException e) {

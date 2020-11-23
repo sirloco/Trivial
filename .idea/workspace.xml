@@ -23,16 +23,16 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Firmadigital" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/UD3ejer2" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="accesodatos" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Cliente">
-    <configuration name="Cliente" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="accesodatos.Cliente" />
+  <component name="RunManager" selected="Application.Jugador">
+    <configuration name="Jugador" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="accesodatos.Jugador" />
       <module name="Trivial" />
       <extension name="coverage">
         <pattern>
@@ -70,11 +70,11 @@
     <list>
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.Servidor" />
-      <item itemvalue="Application.Cliente" />
+      <item itemvalue="Application.Jugador" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Cliente" />
+        <item itemvalue="Application.Jugador" />
         <item itemvalue="Application.Servidor" />
       </list>
     </recent_temporary>
@@ -95,9 +95,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="285" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1606161374757" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1606162498924">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1606163586036">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1606162498924" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1606163586036" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1606164525577">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606164525577" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1606164525577">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606164525577" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1606164525577">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606164525577" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1606164525577">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606164525577" />
   </component>
 </project>

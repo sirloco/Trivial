@@ -10,7 +10,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 
-public class Cliente {
+public class Jugador {
 
     public static void main(String[] args) {
         enviarRespuesta();
