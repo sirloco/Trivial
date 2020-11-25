@@ -1,17 +1,22 @@
 package accesodatos;
 
 import javax.crypto.Cipher;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Hilo extends Thread {
 
     Socket sk;
+
+    Map<String, String> datosJugador = new HashMap<>();
 
     public Hilo(Socket sk) {
         this.sk = sk;
@@ -45,27 +50,86 @@ public class Hilo extends Thread {
 
             //preparamos los flujos para la comunicacion con el jugador
             ObjectOutputStream oos = new ObjectOutputStream(sk.getOutputStream());
-
             ObjectInputStream ois = new ObjectInputStream(sk.getInputStream());
+            PrintWriter flujosalida = new PrintWriter(sk.getOutputStream(), true);
+            BufferedReader flujoentrada = new BufferedReader(new InputStreamReader(sk.getInputStream()));
 
             //se envia la clave publica
             oos.writeObject(publica);
 
-            //todo aqui empiezan los cambios
+            /********************************* comprobamos Nombre del jugador *****************************************/
+            Matcher mat;
+            Pattern pat;
+            do {
+
+                //recibimos el nombre del jugador
+                datosJugador.put("nombre", flujoentrada.readLine());
+
+                //Patron de letras en minusculas de 5 caracteres o mas
+                pat = Pattern.compile("[a-z]{5,}");
+
+                //Se hace la comprobacion
+                mat = pat.matcher(datosJugador.get("nombre"));
+
+                //Devuelve al jugador bien o mal en funcion de lo recibido
+                flujosalida.println(mat.matches() ? "bien" : "mal");
+
+            } while (!mat.matches());//Repite si no cumple el patron
+
+            /**********************************************************************************************************/
+
+            /********************************* comprobamos Apellidos del jugador **************************************/
+
+            do {
+
+                //recibimos los apellidos del jugador
+                datosJugador.put("apellidos", flujoentrada.readLine());
+
+                //Patron de letras en minusculas de 5 caracteres o mas
+                pat = Pattern.compile("[a-z]{5,}");
+
+                //Se hace la comprobacion
+                mat = pat.matcher(datosJugador.get("apellidos"));
+
+                //Devuelve al jugador bien o mal en funcion de lo recibido
+                flujosalida.println(mat.matches() ? "bien" : "mal");
+
+            } while (!mat.matches());//Repite si no cumple el patron
+
+            /**********************************************************************************************************/
+
+            /********************************* comprobamos edad del jugador **************************************/
+
+            do {
+
+                //recibimos el nombre del jugador
+                datosJugador.put("edad", flujoentrada.readLine());
+
+                //Patron mayor de 18 años menor
+                pat = Pattern.compile("^1[8-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9]$");
+
+                //Se hace la comprobacion
+                mat = pat.matcher(datosJugador.get("edad"));
+
+                //Devuelve al jugador bien o mal en funcion de lo recibido
+                flujosalida.println(mat.matches() ? "bien" : "mal");
+
+            } while (!mat.matches());//Repite si no cumple el patron
+
+            /**********************************************************************************************************/
+
+            System.out.println("nombre Jugador: " + datosJugador.get("nombre"));
 
             String acertijo1 = "- Solo tiene una voz y anda con cuatro pies por la mañana, con dos pies al mediodía y " +
                     "con tres pies por la noche.";
 
-
-            String nombre = "nombreJugador";
-            String normasJuego = " -.-.-.-.-.- El juego de la Esfinge-.-.-.-.-.- \n Buenas tardes, " + nombre + " - dijo la Esfinge- " +
+            String normasJuego = " -.-.-.-.-.- El juego de la Esfinge-.-.-.-.-.- \n Buenas tardes, " + datosJugador.get("nombre") + " - dijo la Esfinge- " +
                     "\ntienes que adivinar mis tres acertijos si quieres entrar en la ciudad.";
 
-
-            System.out.println(normasJuego);
+            oos.writeObject(normasJuego);
             //oos.writeObject();
-            /////////////////////////////////
 
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             //Se recibe el mensaje cifrado
             byte[] respuesta = (byte[]) ois.readObject();
@@ -80,7 +144,8 @@ public class Hilo extends Thread {
             oos.close();
             sk.close();
 
-        } catch (Exception e) {
+        } catch (
+                Exception e) {
             e.printStackTrace();
         }
     }

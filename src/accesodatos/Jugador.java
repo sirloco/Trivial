@@ -33,17 +33,76 @@ public class Jugador {
             //Se crean los flujos de comunicaion con el servidor
             ObjectOutputStream oos = new ObjectOutputStream(cliente.getOutputStream());
             ObjectInputStream ois = new ObjectInputStream(cliente.getInputStream());
+            PrintWriter flujosalida = new PrintWriter(cliente.getOutputStream(), true);
+            BufferedReader flujoentrada = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
 
             //SE  recoge la clave publica
             PublicKey llave = (PublicKey) ois.readObject();
 
             System.out.println("Clave publica Recibida " + llave);
 
+
+            /********************************* Se envia el nombre al servidor *****************************************/
+
+            boolean continua;
+            do {
+
+                System.out.println("Nombre Jugador: ");
+                String nombre = br.readLine();
+
+                flujosalida.println(nombre);
+
+                continua = flujoentrada.readLine().equals("mal");
+
+                System.out.println(continua ?
+                        "El nombre debe tener al menos cinco letras y minusculas" : "Nombre Correcto");
+
+            } while (continua);
+
+            /**********************************************************************************************************/
+
+
+            /********************************* Se envian los apellidos al servidor ************************************/
+
+            do {
+
+                System.out.println("Apellidos Jugador: ");
+                String apellidos = br.readLine();
+
+                flujosalida.println(apellidos);
+
+                continua = flujoentrada.readLine().equals("mal");
+
+                System.out.println(continua ?
+                        "Los apellidos debe tener al menos cinco letras y minusculas" : "Apellidos Correctos");
+
+            } while (continua);
+
+            /**********************************************************************************************************/
+
+            /********************************* Se envia la edad al servidor *******************************************/
+
+            do {
+
+                System.out.println("Edad del Jugador: ");
+                String edad = br.readLine();
+
+                flujosalida.println(edad);
+
+                continua = flujoentrada.readLine().equals("mal");
+
+                System.out.println(continua ? "Debe ser mayor de edad" : "Edad Correcta");
+
+            } while (continua);
+
+            /**********************************************************************************************************/
+
+
             //Se crea el encriptador para descifrar/cifrar los mensajes
             Cipher encriptador = Cipher.getInstance("RSA");
 
             //Encriptando la respuesta para enviar al servidor
-            encriptador.init(Cipher.ENCRYPT_MODE,llave);
+            encriptador.init(Cipher.ENCRYPT_MODE, llave);
 
             //Se obtiene por teclado la respuesta del jugador
             System.out.print("Respuesta: ");
@@ -59,7 +118,6 @@ public class Jugador {
             ois.close();
             oos.close();
             cliente.close();
-
 
         } catch (IOException | ClassNotFoundException | NoSuchPaddingException | NoSuchAlgorithmException |
                 InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
