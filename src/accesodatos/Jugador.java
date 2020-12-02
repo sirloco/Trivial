@@ -152,20 +152,25 @@ public class Jugador {
             System.out.print("Verificando que la Esfinge es el emisor....");
 
             //se verifica la firma
-            System.out.print(verificarsa.verify(firma) ? "Verificada firma de las normas del juego" : "Intento de falsificación");
+            boolean verificado = verificarsa.verify(firma);
+            System.out.print(verificado ? "Verificada firma de las normas del juego" : "Intento de falsificación");
 
-            System.out.println();
+            if (verificado) {
 
-            acertijo("PRIMER ACERTIJO", flujoentrada, llave, oos);
-            acertijo("SEGUNDO ACERTIJO", flujoentrada, llave, oos);
-            acertijo("TERCER ACERTIJO", flujoentrada, llave, oos);
+                System.out.println();
 
-            System.out.println();
-            //********************************************************************************************************//
-            //Resultado del Juego
-            System.out.println(flujoentrada.readLine());
-            //********************************************************************************************************//
+                acertijo("PRIMER ACERTIJO", flujoentrada, llave, oos);
+                acertijo("SEGUNDO ACERTIJO", flujoentrada, llave, oos);
+                acertijo("TERCER ACERTIJO", flujoentrada, llave, oos);
 
+                System.out.println();
+                //********************************************************************************************************//
+                //Resultado del Juego
+                System.out.println(flujoentrada.readLine());
+                //********************************************************************************************************//
+            } else {
+                System.out.println("Fin de la partida por intento de falsificacion de reglas de juego");
+            }
             //Se cierran los flujos de comunicacion y el socket
             ois.close();
             oos.close();
